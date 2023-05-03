@@ -13,7 +13,7 @@ Dead Shooter adalah game petualangan tembak menembak zombie dengan tujuan sampai
 
 # Kontributor
 NIM | Nama
-----------
+------ | ------
 Fadillah Rizky Junjungan | 121140194
 Zeddhy Recca Fitracia | 12114199
 Solafide Zamili | 121140201
