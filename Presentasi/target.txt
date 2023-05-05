@@ -1,0 +1,5 @@
+1. Gravitasi
+2. Tembak
+3. Status (Masih berjalan/Game Over)
+4. Score
+5. Level (1-5)
