@@ -1,47 +1,110 @@
 import pygame
-from imageloader import imageloader as imgres
-from Player import Player
-from Zombie import Zombie
-import os
-
-class Deadshooter:
-	width = 850
-	height = 500
-	velo = 5
-	def __init__(self):
-		pygame.init()
-		self.screen = pygame.display.set_mode((self.width, self.height))
-		pygame.display.set_caption(" Dead Shooter ")
-		self.bg = pygame.image.load("./assets/BG.png").convert()
-		self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
-
-	def running(self):
-		self.running = True
-		while self.running:
-			pygame.time.delay(100)
-			self.screen.blit(self.bg, (0,0))
-			Player().show(self.screen)
-			Zombie().show(self.screen)
-			for event in pygame.event.get():
-				if event.type==pygame.QUIT:
-					self.running = False
-
-			# Event Keyboard
-			keys = pygame.key.get_pressed()
-			if keys[pygame.K_UP] and Player().coor[1]>0:
-				Player().coor[1] -= self.velo
-			if keys[pygame.K_DOWN] and Player().coor[1]<400:
-				Player().coor[1] += self.velo
-			if keys[pygame.K_LEFT] and Player().coor[0]>0:
-				Player().coor[0] -= self.velo
-			if keys[pygame.K_RIGHT] and Player().coor[0]<500:
-				Player().coor[0] += self.velo
-			Zombie().coor[0] -= self.velo
-			pygame.display.update()
-	def exit(self):
-		pygame.quit()
+import sys
+from game import Deadshooter
+from level import LevelSelection
+from setting import Settings
 
 
-Games = Deadshooter()
-Games.running()
-Games.exit()
+class Game:
+    def __init__(self):
+        pygame.init()
+        pygame.display.set_caption("Deadshooter")
+        self.screen = pygame.display.set_mode((850, 500))
+        self.mainClock = pygame.time.Clock()
+        self.font = pygame.font.SysFont(None, 20)
+        self.click = False
+
+        self.main_menu_bg = pygame.image.load("./assets/main menu.png").convert()
+        self.start_bg = pygame.image.load("./assets/BG.png").convert()
+
+        self.start_button_img = pygame.image.load(
+            "./assets/start_button1.png"
+        ).convert_alpha()
+        self.start_button_hover_img = pygame.image.load("./assets/blank.png")
+        self.level_button_img = pygame.image.load(
+            "./assets/level_button1.png"
+        ).convert_alpha()
+        self.level_button_hover_img = pygame.image.load(
+            "./assets/blank.png"
+        ).convert_alpha()
+        self.settings_button_img = pygame.image.load(
+            "./assets/setting_button1.png"
+        ).convert_alpha()
+        self.settings_button_hover_img = pygame.image.load(
+            "./assets/blank.png"
+        ).convert_alpha()
+        self.exit_button_img = pygame.image.load(
+            "./assets/exit_button1.png"
+        ).convert_alpha()
+        self.exit_button_hover_img = pygame.image.load(
+            "./assets/blank.png"
+        ).convert_alpha()
+
+    def main_menu(self):
+        while True:
+            self.screen.blit(self.main_menu_bg, (0, 0))
+
+            mx, my = pygame.mouse.get_pos()
+
+            start_button_rect = pygame.Rect(135, 160, 225, 61)
+            level_button_rect = pygame.Rect(135, 235, 225, 61)
+            settings_button_rect = pygame.Rect(135, 305, 225, 61)
+            exit_button_rect = pygame.Rect(135, 375, 225, 61)
+
+            if start_button_rect.collidepoint((mx, my)):
+                self.screen.blit(self.start_button_hover_img, start_button_rect)
+                if self.click:
+                    self.start()
+            else:
+                self.screen.blit(self.start_button_img, start_button_rect)
+
+            if level_button_rect.collidepoint((mx, my)):
+                self.screen.blit(self.level_button_hover_img, level_button_rect)
+                if self.click:
+                    self.level_selection()
+            else:
+                self.screen.blit(self.level_button_img, level_button_rect)
+
+            if settings_button_rect.collidepoint((mx, my)):
+                self.screen.blit(self.settings_button_hover_img, settings_button_rect)
+                if self.click:
+                    self.settings()
+            else:
+                self.screen.blit(self.settings_button_img, settings_button_rect)
+
+            if exit_button_rect.collidepoint((mx, my)):
+                self.screen.blit(self.exit_button_hover_img, exit_button_rect)
+                if self.click:
+                    pygame.quit()
+                    sys.exit()
+            else:
+                self.screen.blit(self.exit_button_img, exit_button_rect)
+
+            self.click = False
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
+
+            pygame.display.update()
+            self.mainClock.tick(60)
+
+    def start(self):
+        start = Deadshooter()
+        start.run()
+
+    def level_selection(self):
+        level = LevelSelection()
+        level.run()
+
+    def settings(self):
+        setting = Settings()
+        setting.run()
+
+
+if __name__ == "__main__":
+    game = Game()
+    game.main_menu()
