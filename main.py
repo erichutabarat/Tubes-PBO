@@ -1,9 +1,7 @@
 import pygame
 import sys
-from game import Deadshooter
-from level import LevelSelection
+from levelmain import LevelSelection
 from setting import Settings
-
 
 class Game:
     def __init__(self):
@@ -14,8 +12,8 @@ class Game:
         self.font = pygame.font.SysFont(None, 20)
         self.click = False
 
-        self.main_menu_bg = pygame.image.load("./assets/main menu.png").convert()
-        self.start_bg = pygame.image.load("./assets/BG.png").convert()
+        self.main_menu_bg = pygame.image.load("./assets/menu.png").convert()
+       # self.start_bg = pygame.image.load("./assets/BG.png").convert()
 
         self.start_button_img = pygame.image.load(
             "./assets/start_button1.png"
@@ -46,31 +44,35 @@ class Game:
 
             mx, my = pygame.mouse.get_pos()
 
-            start_button_rect = pygame.Rect(135, 160, 225, 61)
-            level_button_rect = pygame.Rect(135, 235, 225, 61)
-            settings_button_rect = pygame.Rect(135, 305, 225, 61)
-            exit_button_rect = pygame.Rect(135, 375, 225, 61)
+            start_button_rect = pygame.Rect(139, 157, 225, 61)
+            level_button_rect = pygame.Rect(138, 232, 225, 61)
+            settings_button_rect = pygame.Rect(138, 303, 225, 61)
+            exit_button_rect = pygame.Rect(139, 375, 225, 61)
 
             if start_button_rect.collidepoint((mx, my)):
-                self.screen.blit(self.start_button_hover_img, start_button_rect)
+                self.screen.blit(self.start_button_hover_img,
+                                 start_button_rect)
                 if self.click:
-                    self.start()
+                    self.level_selection()
             else:
                 self.screen.blit(self.start_button_img, start_button_rect)
 
             if level_button_rect.collidepoint((mx, my)):
-                self.screen.blit(self.level_button_hover_img, level_button_rect)
+                self.screen.blit(self.level_button_hover_img,
+                                 level_button_rect)
                 if self.click:
                     self.level_selection()
             else:
                 self.screen.blit(self.level_button_img, level_button_rect)
 
             if settings_button_rect.collidepoint((mx, my)):
-                self.screen.blit(self.settings_button_hover_img, settings_button_rect)
+                self.screen.blit(self.settings_button_hover_img,
+                                 settings_button_rect)
                 if self.click:
                     self.settings()
             else:
-                self.screen.blit(self.settings_button_img, settings_button_rect)
+                self.screen.blit(self.settings_button_img,
+                                 settings_button_rect)
 
             if exit_button_rect.collidepoint((mx, my)):
                 self.screen.blit(self.exit_button_hover_img, exit_button_rect)
@@ -87,14 +89,11 @@ class Game:
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
+                        print("left klik at", mx, my)
                         self.click = True
 
             pygame.display.update()
             self.mainClock.tick(60)
-
-    def start(self):
-        start = Deadshooter()
-        start.run()
 
     def level_selection(self):
         level = LevelSelection()
@@ -103,7 +102,6 @@ class Game:
     def settings(self):
         setting = Settings()
         setting.run()
-
 
 if __name__ == "__main__":
     game = Game()
