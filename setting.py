@@ -1,9 +1,9 @@
 import pygame
 import sys
 from pygame.locals import *
-from level_1 import Deadshooter
-from level_2 import SecondLevel
-from level_3 import ThirdLevel
+from level_1 import play_level1
+from level_2 import play_level2
+from level_3 import play_level3
 
 class Settings:
     def __init__(self):

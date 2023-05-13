@@ -1,9 +1,9 @@
 import pygame
 import sys
 from pygame.locals import *
-from level_1 import Deadshooter
-from level_2 import SecondLevel
-from level_3 import ThirdLevel
+from level_1 import play_level1
+from level_2 import play_level2
+from level_3 import play_level3
 
 class LevelSelection:
     def __init__(self):
@@ -86,19 +86,16 @@ class LevelSelection:
             self.mainClock.tick(60)
 
     def first_level(self):
-        level_1 = Deadshooter()
-        level_1.run()
+        level_1 = play_level1()
         self.click = False 
 
     def second_level(self):
-        level_2 = SecondLevel()
-        level_2.run()
+        level_2 = play_level2()
         self.click = False 
 
     def thrid_level(self):
-        level_3 = ThirdLevel()
-        level_3.run()
-        self.click = False 
+        level_3 = play_level3()
+        self.click = False
 
 if __name__ == "__main__":
     level = LevelSelection()

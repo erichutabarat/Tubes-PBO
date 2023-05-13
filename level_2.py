@@ -1,39 +1,22 @@
 import pygame
 import sys
 from pygame.locals import *
+from imageloader import imageloader as imgres
+from Player import Player
+from Zombie import Zombie
+from Deadshooter import Deadshooter
+import os
 
-
-class SecondLevel:
+class level2(pygame.sprite.Sprite):
+    width = 850
+    height = 500
     def __init__(self):
+        pygame.init()
         self.mainClock = pygame.time.Clock()
-        self.font = pygame.font.SysFont(None, 20)
-        self.click = False
-        self.screen = pygame.display.set_mode((850, 500))
-   
+        self.screen = pygame.display.set_mode((self.width, self.height))
 
-    def draw_text(self, text, color, x, y):
-        textobj = self.font.render(text, 1, color)
-        textrect = textobj.get_rect()
-        textrect.topleft = (x, y)
-        self.screen.blit(textobj, textrect)
+map_level2 = level2()
 
-    def run(self):
-        running = True
-        while running:
-            #self.screen.blit(self.bg, (0, 0))
-
-            self.draw_text("level 2", (255, 255, 255), 20, 20)
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        running = False
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        #print("left klik at", mx, my)
-                        self.click = True
-
-            pygame.display.update()
-            self.mainClock.tick(60)
+def play_level2():
+    game_level2 = Deadshooter(map_level2)
+    game_level2.run()

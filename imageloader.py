@@ -17,3 +17,11 @@ class imageloader:
 		self.zombie_img = pygame.image.load("./assets/Zombie.png")
 		self.zombie_img = pygame.transform.scale(self.zombie_img, (100, 80))
 		return self.zombie_img
+
+	def tanah(self):
+		self.tanah_img = pygame.image.load("./assets/Tanah2.png")
+		self.tanah_img = pygame.transform.scale(self.tanah_img, (128, 128))
+		return self.tanah_img
+
+	def show_tanah(self, target, posx):
+		self.cleanimg(target, self.tanah(), (posx, 440), 250)
