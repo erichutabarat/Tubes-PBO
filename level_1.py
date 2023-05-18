@@ -16,7 +16,7 @@ class level1(pygame.sprite.Sprite):
         self.screen = pygame.display.set_mode((self.width, self.height))
 
 map_level1 = level1()
-
+player_level1 = Player()
 def play_level1():
-    game_level1 = Deadshooter(map_level1)
+    game_level1 = Deadshooter(map_level1, player_level1)
     game_level1.run()

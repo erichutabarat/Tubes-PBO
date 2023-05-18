@@ -3,16 +3,18 @@ from imageloader import imageloader
 
 
 class Player:
-    coor = [100, 350]
     hp = 100
     vel_y = 0
     graf = 1
-    isjump = False
-    proyektil_peluru = []
     peluru_velo = 10
     offsetx = 100
     offsety = 30
     jumlah_peluru = 10
+    def __init__(self):
+        self.proyektil_peluru = []
+        self.isjump = False
+        self.jumlah_peluru = 10
+        self.coor = [100, 361]
     def dead(self):
         pass
 
@@ -28,11 +30,11 @@ class Player:
         self.isjump = True
 
     def gravitasi(self):
-        if self.coor[1]==350:
-            self.isjump = False
-        else:
+        if self.coor[1]<361:
             self.vel_y += self.graf
             self.coor[1] += self.vel_y
+        elif self.coor[1]==361:
+            self.isjump = False
     # Fitur tembak() masih error, jumlah peluru tidak berkurang meskipun sudah menembak
     def tembak(self):
         if self.jumlah_peluru>0:
