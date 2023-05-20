@@ -13,11 +13,13 @@ class Zombies:
 		img_zombie = pygame.transform.scale(img_zombie, (95, 90))
 		for data in self.data_zombie:
 			# imageloader().cleanimg(target, imageloader().zombie(), (data[0], data[1]), 250)
+			new_t = target.copy()
 			target.blit(img_zombie, (data[0], data[1]))
+			target = new_t
 
 	def tambahzombie(self):
 		self.data_zombie.append([700,380])
 
-	# def pergerakan_zombie(self):
-	# 	for zombie in self.data_zombie:
-	# 		zombie[0] -= 2
+	def pergerakan_zombie(self):
+		for zombie in self.data_zombie:
+			zombie[0] -= 2

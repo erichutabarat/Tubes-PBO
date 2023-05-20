@@ -57,7 +57,7 @@ class Deadshooter:
             
             # Memunculkan zombie baru di layar
             self.zombiex.tambahzombie()
-            # self.zombiex.pergerakan_zombie()
+            self.zombiex.pergerakan_zombie()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
