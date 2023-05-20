@@ -24,4 +24,4 @@ class imageloader:
 		return self.tanah_img
 
 	def show_tanah(self, target, posx):
-		self.cleanimg(target, self.tanah(), (posx, 440), 250)
+		self.cleanimg(target, self.tanah(), (posx, 460), 250)

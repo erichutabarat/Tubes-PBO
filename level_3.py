@@ -3,7 +3,7 @@ import sys
 from pygame.locals import *
 from imageloader import imageloader as imgres
 from Player import Player
-from Zombie import Zombie
+from Zombie import Zombies
 from Deadshooter import Deadshooter
 import os
 
@@ -17,6 +17,7 @@ class level3(pygame.sprite.Sprite):
 
 map_level3 = level3()
 player_level3 = Player()
+map_zombie = Zombies()
 def play_level3():
-    game_level3 = Deadshooter(map_level3, player_level3)
+    game_level3 = Deadshooter(map_level3, player_level3, map_zombie)
     game_level3.run()

@@ -9,12 +9,11 @@ class Player:
     peluru_velo = 10
     offsetx = 100
     offsety = 30
-    jumlah_peluru = 10
     def __init__(self):
         self.proyektil_peluru = []
         self.isjump = False
         self.jumlah_peluru = 10
-        self.coor = [100, 361]
+        self.coor = [100, 350]
     def dead(self):
         pass
 
@@ -33,7 +32,7 @@ class Player:
         if self.coor[1]<361:
             self.vel_y += self.graf
             self.coor[1] += self.vel_y
-        elif self.coor[1]==361:
+        elif self.coor[1]==350:
             self.isjump = False
     # Fitur tembak() masih error, jumlah peluru tidak berkurang meskipun sudah menembak
     def tembak(self):
@@ -46,10 +45,15 @@ class Player:
         else:
             print("Peluru habis")
     
-    def pergerakan_peluru(self):
+    def pergerakan_peluru(self, zombie):
         # menggerakkan proyektil ke atas
         for bullet in self.proyektil_peluru:
             bullet[0] += self.peluru_velo
             # menghapus proyektil yang sudah keluar layar
             if bullet[0] > 800:
                 self.proyektil_peluru.remove(bullet)
+            for coor in zombie.data_zombie:
+                if bullet[0]==coor[0]+20 and not (bullet[1]<coor[1]):
+                    print("terkena damage")
+                    self.proyektil_peluru.remove(bullet)
+                    break

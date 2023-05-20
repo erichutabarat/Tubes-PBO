@@ -1,11 +1,11 @@
 from Player import Player
-from Zombie import Zombie
+from Zombie import Zombies
 from imageloader import imageloader
 import pygame
 import os, sys
 class Deadshooter:
     velo = 10
-    def __init__(self, map, playerx):
+    def __init__(self, map, playerx, zombiex):
         self.mainClock = map.mainClock
         self.screen = map.screen
         self.font = pygame.font.SysFont(None, 20)
@@ -13,6 +13,7 @@ class Deadshooter:
         self.bg = pygame.image.load("./assets/BG.png").convert()
         self.bg = pygame.transform.scale(self.bg, (map.width, map.height))
         self.playerx = playerx
+        self.zombiex = zombiex
         self.can_jump = True
     def draw_text(self, text, color, x, y):
         textobj = self.font.render(text, 1, color)
@@ -30,7 +31,7 @@ class Deadshooter:
                 imageloader().show_tanah(self.screen, int(0+x*128))
             # Event Keyboard
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_UP] and self.can_jump:
+            if keys[pygame.K_UP] and self.playerx.coor[1]>270 and self.can_jump:
                 self.playerx.coor[1] -= self.velo*2
                 self.playerx.jump()
                 self.can_Jump = False
@@ -48,16 +49,15 @@ class Deadshooter:
                     print("Peluru habis")
                 
 
-            # Hide sementara (fokus ke player)
-            # Zombie().coor[0] -= self.velo-7
             self.playerx.gravitasi()
-            self.playerx.pergerakan_peluru()
-            self.playerx.show(self.screen)
+            self.playerx.pergerakan_peluru(self.zombiex)
+            
             if self.playerx.coor[1]==361:
                 self.can_jump = True
-            # Hide sementara (fokus ke player)
-            # Zombie().show(self.screen)
-
+            
+            # Memunculkan zombie baru di layar
+            self.zombiex.tambahzombie()
+            # self.zombiex.pergerakan_zombie()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -65,6 +65,10 @@ class Deadshooter:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         running = False
-            
+            self.showobj(self.screen, self.playerx, self.zombiex)            
             pygame.display.update()
-            self.mainClock.tick(60)
+            self.mainClock.tick(30)
+    
+    def showobj(self,target, player, zombie):
+        player.show(target)
+        zombie.show(target)
