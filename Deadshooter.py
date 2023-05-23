@@ -30,6 +30,14 @@ class Deadshooter:
             for x in range(0, 7):
                 imageloader().show_tanah(self.screen, int(0+x*128))
             # Event Keyboard
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+
             keys = pygame.key.get_pressed()
             if keys[pygame.K_UP] and self.playerx.coor[1]>270 and self.can_jump:
                 self.playerx.coor[1] -= self.velo*2
@@ -58,13 +66,8 @@ class Deadshooter:
             # Memunculkan zombie baru di layar
             self.zombiex.tambahzombie()
             self.zombiex.pergerakan_zombie()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        running = False
+
+
             self.showobj(self.screen, self.playerx, self.zombiex)            
             pygame.display.update()
             self.mainClock.tick(30)
