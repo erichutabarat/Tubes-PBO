@@ -1,4 +1,13 @@
 import pygame
+
+class Sprite(pygame.sprite.Sprite):
+	def __init__(self, img, x, y):
+		super().__init__()
+		self.image = img
+		self.rect = self.image.get_rect()
+		self.rect.x = x
+		self.rect.y = y
+
 class imageloader:
 	def cleanimg(self, target, src, loc, op):
 		x = loc[0]
@@ -23,5 +32,9 @@ class imageloader:
 		self.tanah_img = pygame.transform.scale(self.tanah_img, (128, 128))
 		return self.tanah_img
 
-	def show_tanah(self, target, posx):
-		self.cleanimg(target, self.tanah(), (posx, 460), 250)
+	def show_tanah(self, target):
+		group = pygame.sprite.Group()
+		for i in range(0, 7):
+			tanah = Sprite(self.tanah(), (0+i*128), 460)
+			group.add(tanah)
+		group.draw(target)

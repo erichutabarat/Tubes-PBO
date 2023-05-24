@@ -39,7 +39,6 @@ class Player:
         if self.jumlah_peluru>0:
             # menambahkan posisi proyektil ke dalam list bullets
             self.proyektil_peluru.append([self.coor[0]+self.offsetx, self.coor[1]+self.offsety])
-            print(self.jumlah_peluru)
             self.jumlah_peluru = self.jumlah_peluru - 1
             self.jumlah_peluru = len(self.proyektil_peluru)
         else:

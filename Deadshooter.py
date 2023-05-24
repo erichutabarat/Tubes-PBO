@@ -27,8 +27,8 @@ class Deadshooter:
             pygame.time.delay(10)
             self.screen.blit(self.bg, (0, 0))
             self.draw_text("< esc", (255, 255, 255), 20, 20)
-            for x in range(0, 7):
-                imageloader().show_tanah(self.screen, int(0+x*128))
+            # Menampilkan tile tanah (ground)
+            imageloader().show_tanah(self.screen)
             # Event Keyboard
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -70,7 +70,8 @@ class Deadshooter:
 
             self.showobj(self.screen, self.playerx, self.zombiex)            
             pygame.display.update()
-            self.mainClock.tick(30)
+            print(self.mainClock.get_fps())
+            self.mainClock.tick(60)
     
     def showobj(self,target, player, zombie):
         player.show(target)
