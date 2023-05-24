@@ -55,5 +55,6 @@ class Player:
                 if bullet[0]==coor[0]+20 and not (bullet[1]<coor[1]):
                     print("terkena damage")
                     self.proyektil_peluru.remove(bullet)
-                    # zombie.data_zombie.remove(coor)
+                    zombie.data_zombie.remove(coor)
                     break
+        # print(f"Jumlah Zombie: {len(zombie.data_zombie)}")

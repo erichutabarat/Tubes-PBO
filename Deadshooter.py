@@ -23,12 +23,15 @@ class Deadshooter:
 
     def run(self):
         running = True
+        timer = pygame.time.get_ticks()
         while running:
             pygame.time.delay(10)
             self.screen.blit(self.bg, (0, 0))
             self.draw_text("< esc", (255, 255, 255), 20, 20)
             # Menampilkan tile tanah (ground)
             imageloader().show_tanah(self.screen)
+            # Timer game
+            seconds=int((pygame.time.get_ticks()-timer)/1000)
             # Event Keyboard
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -64,15 +67,24 @@ class Deadshooter:
                 self.can_jump = True
             
             # Memunculkan zombie baru di layar
-            self.zombiex.tambahzombie()
+            if seconds==2:
+                self.zombiex.tambahzombie()
+            if seconds==7:
+                self.zombiex.tambahzombie()
+
+            
+            #Pergerakan zombie
             self.zombiex.pergerakan_zombie()
-
-
+            # for zombies in self.zombiex.data_zombie:
+            #     self.zombiex.pergerakan_zombie(zombies)
             self.showobj(self.screen, self.playerx, self.zombiex)            
             pygame.display.update()
-            print(self.mainClock.get_fps())
+            
+            #Menampilkan fps
+            # print(self.mainClock.get_fps())
             self.mainClock.tick(60)
-    
+
+            # print(f"detik ke-{seconds}")
     def showobj(self,target, player, zombie):
         player.show(target)
         zombie.show(target)

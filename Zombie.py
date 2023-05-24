@@ -16,7 +16,7 @@ class Zombies:
 			target.blit(img_zombie, (data[0], data[1]))
 			target = new_t
 	def tambahzombie(self):
-		self.data_zombie.append([700,380])
+		self.data_zombie.append([720,380])
 
 	def pergerakan_zombie(self):
 		for zombie in self.data_zombie:
