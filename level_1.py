@@ -10,6 +10,7 @@ import os
 class level1(pygame.sprite.Sprite):
     width = 850
     height = 500
+    kemunculan = [3, 5, 10, 15, 25, 30]
     def __init__(self):
         pygame.init()
         self.mainClock = pygame.time.Clock()

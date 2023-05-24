@@ -6,6 +6,7 @@ import os, sys
 class Deadshooter:
     velo = 10
     def __init__(self, map, playerx, zombiex):
+        self.map = map
         self.mainClock = map.mainClock
         self.screen = map.screen
         self.font = pygame.font.SysFont(None, 20)
@@ -67,10 +68,9 @@ class Deadshooter:
                 self.can_jump = True
             
             # Memunculkan zombie baru di layar
-            if seconds==2:
-                self.zombiex.tambahzombie()
-            if seconds==7:
-                self.zombiex.tambahzombie()
+            for i in self.map.kemunculan:
+                if seconds==i:
+                    self.zombiex.tambahzombie()
 
             
             #Pergerakan zombie
