@@ -46,6 +46,9 @@ class Deadshooter:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         running = False
+                        confirmation = self.pause("Do you want to quit? (Y/N)")
+                        if confirmation:
+                            running = False
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_UP] and self.playerx.coor[1]>270 and self.can_jump:
@@ -90,9 +93,26 @@ class Deadshooter:
             self.mainClock.tick(60)
 
             # print(f"detik ke-{seconds}")
+    
     def showobj(self,target, player, zombie):
         player.show(target)
         zombie.show(target)
+    
+    def pause(self, prompt):
+        prompt_text = self.font.render(prompt, True, (255, 255, 255))
+        prompt_text = pygame.transform.scale(prompt_text, (prompt_text.get_width() * 1.5, prompt_text.get_height() * 1.5))
+        self.screen.blit(prompt_text, (300, 300))
+
+        pygame.display.update()
+        answer = None
+        while answer is None:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_y:
+                        answer = True
+                    elif event.key == pygame.K_n:
+                        answer = False
+        return answer
 
     def zombiedamage(self, player, zombie):
         pass
