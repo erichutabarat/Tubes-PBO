@@ -26,9 +26,14 @@ class Deadshooter:
         running = True
         timer = pygame.time.get_ticks()
         while running:
-            pygame.time.delay(10)
+            # pygame.time.delay(10)
             self.screen.blit(self.bg, (0, 0))
             self.draw_text("< esc", (255, 255, 255), 20, 20)
+            # Menampilkan hp & ammo
+            hp = int(self.playerx.hp)
+            peluru = int(self.playerx.jumlah_peluru)
+            self.draw_text(f"Hp: {hp}", (255, 255, 255), 750, 20)
+            self.draw_text(f"Ammo: {peluru}", (255, 255, 255), 750, 35)
             # Menampilkan tile tanah (ground)
             imageloader().show_tanah(self.screen)
             # Timer game
@@ -88,3 +93,6 @@ class Deadshooter:
     def showobj(self,target, player, zombie):
         player.show(target)
         zombie.show(target)
+
+    def zombiedamage(self, player, zombie):
+        pass

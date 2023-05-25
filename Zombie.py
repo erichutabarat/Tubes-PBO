@@ -20,4 +20,6 @@ class Zombies:
 
 	def pergerakan_zombie(self):
 		for zombie in self.data_zombie:
-			zombie[0] -= 2
+			zombie[0] -= 5
+			if zombie[0]==0:
+				self.data_zombie.remove(zombie)

@@ -3,16 +3,16 @@ from imageloader import imageloader
 
 
 class Player:
-    hp = 100
     vel_y = 0
     graf = 1
-    peluru_velo = 10
+    peluru_velo = 15
     offsetx = 100
     offsety = 30
     def __init__(self):
         self.proyektil_peluru = []
         self.isjump = False
-        self.jumlah_peluru = 10
+        self.hp = 100
+        self.jumlah_peluru = 50
         self.coor = [100, 350]
     def dead(self):
         pass
@@ -36,13 +36,13 @@ class Player:
             self.isjump = False
     # Fitur tembak() masih error, jumlah peluru tidak berkurang meskipun sudah menembak
     def tembak(self):
-        if self.jumlah_peluru>0:
+        if self.jumlah_peluru > 0:
             # menambahkan posisi proyektil ke dalam list bullets
-            self.proyektil_peluru.append([self.coor[0]+self.offsetx, self.coor[1]+self.offsety])
-            self.jumlah_peluru = self.jumlah_peluru - 1
-            self.jumlah_peluru = len(self.proyektil_peluru)
+            self.proyektil_peluru.append([self.coor[0] + self.offsetx, self.coor[1] + self.offsety])
+            self.jumlah_peluru -= 1
         else:
-            print("Peluru habis")
+            # print("Peluru habis")
+            pass
     
     def pergerakan_peluru(self, zombie):
         # menggerakkan proyektil ke atas
