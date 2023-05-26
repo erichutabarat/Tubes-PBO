@@ -98,7 +98,19 @@ class Deadshooter:
             self.zombiex.pergerakan_zombie()
             
             # Menampilkan object player dan zombie
-            self.showobj(self.screen, self.playerx, self.zombiex)            
+            self.showobj(self.screen, self.playerx, self.zombiex)
+
+            # Menampilkan bonus
+            last_bonus = 0
+            self.playerx.show_bonus(self.screen)
+            for i in self.map.bonus:
+                if seconds==i and seconds is not last_bonus:
+                    last_bonus = seconds
+                    self.playerx.bonus_ammo(last_bonus)
+            # Mengambil bonus ammo
+            self.playerx.grab_bonus()
+
+            # Update frame
             pygame.display.update()
             
             #Menampilkan fps

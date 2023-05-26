@@ -10,6 +10,7 @@ class Player:
     offsety = 30
     def __init__(self):
         self.proyektil_peluru = []
+        self.bonus_ammo_list = []
         self.isjump = False
         self.hp = 100
         self.jumlah_peluru = 100
@@ -58,3 +59,32 @@ class Player:
                     zombie.data_zombie.remove(coor)
                     break
         # print(f"Jumlah Zombie: {zombie.data_zombie}")
+    def bonus_ammo(self, id):
+        self.bonus_ammo_list.append([720, 180, id])
+
+    def show_bonus(self, target):
+        img_bonus = pygame.image.load("./assets/ammo_box.png").convert_alpha()
+        img_bonus = pygame.transform.scale(img_bonus, (80, 80))
+        for data in self.bonus_ammo_list:
+            # new_t = target.copy()
+            target.blit(img_bonus, (data[0], data[1]))
+            # target = new_t
+
+        for data in self.bonus_ammo_list:
+            data[0] -= 5
+            if data[0]==0:
+                self.bonus_ammo_list.remove(data)
+
+        same_ammo = set()
+        res = []
+        for data in self.bonus_ammo_list:
+            if data[2] not in same_ammo:
+                res.append(data)
+                same_ammo.add(data[2])
+
+        self.bonus_ammo_list = res
+    def grab_bonus(self):
+        for data in self.bonus_ammo_list:
+            if data[0]==self.coor[0]:
+                self.jumlah_peluru += 50
+                self.bonus_ammo_list.remove(data)
