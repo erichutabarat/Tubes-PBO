@@ -12,9 +12,9 @@ class Zombies:
 		img_zombie = pygame.image.load("./assets/Zombie1.png").convert_alpha()
 		img_zombie = pygame.transform.scale(img_zombie, (95, 90))
 		for data in self.data_zombie:
-			new_t = target.copy()
+			# new_t = target.copy()
 			target.blit(img_zombie, (data[0], data[1]))
-			target = new_t
+			# target = new_t
 	def tambahzombie(self, id):
 		self.data_zombie.append([720,380, id])
 
