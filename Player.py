@@ -12,7 +12,7 @@ class Player:
         self.proyektil_peluru = []
         self.isjump = False
         self.hp = 100
-        self.jumlah_peluru = 50
+        self.jumlah_peluru = 100
         self.coor = [100, 350]
     def dead(self):
         pass
@@ -57,4 +57,4 @@ class Player:
                     self.proyektil_peluru.remove(bullet)
                     zombie.data_zombie.remove(coor)
                     break
-        # print(f"Jumlah Zombie: {len(zombie.data_zombie)}")
+        print(f"Jumlah Zombie: {len(zombie.data_zombie)}")

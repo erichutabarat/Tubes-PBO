@@ -45,7 +45,6 @@ class Deadshooter:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
-                        running = False
                         confirmation = self.pause("Do you want to quit? (Y/N)")
                         if confirmation:
                             running = False
@@ -76,15 +75,17 @@ class Deadshooter:
                 self.can_jump = True
             
             # Memunculkan zombie baru di layar
+            last_spawn = 0
             for i in self.map.kemunculan:
-                if seconds==i:
+                if seconds==i and seconds is not last_spawn:
                     self.zombiex.tambahzombie()
+                    last_spawn = seconds
 
             
             #Pergerakan zombie
             self.zombiex.pergerakan_zombie()
-            # for zombies in self.zombiex.data_zombie:
-            #     self.zombiex.pergerakan_zombie(zombies)
+            
+            # Menampilkan object player dan zombie
             self.showobj(self.screen, self.playerx, self.zombiex)            
             pygame.display.update()
             
@@ -100,10 +101,10 @@ class Deadshooter:
     
     def pause(self, prompt):
         prompt_text = self.font.render(prompt, True, (255, 255, 255))
-        prompt_text = pygame.transform.scale(prompt_text, (prompt_text.get_width() * 1.5, prompt_text.get_height() * 1.5))
+        prompt_text = pygame.transform.scale(prompt_text, (int(prompt_text.get_width() * 1.5), int(prompt_text.get_height() * 1.5)))
         self.screen.blit(prompt_text, (300, 300))
-
         pygame.display.update()
+
         answer = None
         while answer is None:
             for event in pygame.event.get():
@@ -112,6 +113,7 @@ class Deadshooter:
                         answer = True
                     elif event.key == pygame.K_n:
                         answer = False
+
         return answer
 
     def zombiedamage(self, player, zombie):
