@@ -78,8 +78,8 @@ class Deadshooter:
             last_spawn = 0
             for i in self.map.kemunculan:
                 if seconds==i and seconds is not last_spawn:
-                    self.zombiex.tambahzombie()
                     last_spawn = seconds
+                    self.zombiex.tambahzombie(last_spawn)
 
             
             #Pergerakan zombie
