@@ -27,24 +27,25 @@ class Deadshooter:
         running = True
         timer = pygame.time.get_ticks()
         while running:
+
+            # Timer game
+            seconds=int((pygame.time.get_ticks()-timer)/1000)
+
             # Menampilkan background
             self.screen.blit(self.bg, (0, 0))
             self.draw_text("< esc", (255, 255, 255), 20, 20)
 
-            # Memulai background sound (Music)
-            pygame.mixer.music.play(-1)
+            self.draw_text(f'{seconds}', (255, 255, 255), 400, 20)
 
             # Menampilkan hp & ammo
             hp = int(self.playerx.hp)
             peluru = int(self.playerx.jumlah_peluru)
-            self.draw_text(f"Hp: {hp}", (255, 255, 255), 750, 20)
-            self.draw_text(f"Ammo: {peluru}", (255, 255, 255), 750, 35)
+            self.draw_text(f"Score: {self.map.score}", (255, 255, 255), 750, 20)
+            self.draw_text(f"Hp: {hp}", (255, 255, 255), 750, 35)
+            self.draw_text(f"Ammo: {peluru}", (255, 255, 255), 750, 50)
             
             # Menampilkan tile tanah (ground)
             imageloader().show_tanah(self.screen)
-            
-            # Timer game
-            seconds=int((pygame.time.get_ticks()-timer)/1000)
             
             # Event Keyboard
             for event in pygame.event.get():
@@ -80,7 +81,7 @@ class Deadshooter:
                 
 
             self.playerx.gravitasi()
-            self.playerx.pergerakan_peluru(self.zombiex)
+            self.playerx.pergerakan_peluru(self.zombiex, self.map)
             
             if self.playerx.coor[1]==361:
                 self.can_jump = True
@@ -90,12 +91,12 @@ class Deadshooter:
             for i in self.map.kemunculan:
                 if seconds==i and seconds is not last_spawn:
                     last_spawn = seconds
-                    self.zombiex.tambahzombie(last_spawn)
+                    self.zombiex.tambahzombie(last_spawn, self.map.hp_zombie)
                     self.zombie_spawn.play()
 
             
             #Pergerakan zombie
-            self.zombiex.pergerakan_zombie()
+            self.zombiex.pergerakan_zombie(self.map, self.playerx)
             
             # Menampilkan object player dan zombie
             self.showobj(self.screen, self.playerx, self.zombiex)
@@ -109,6 +110,13 @@ class Deadshooter:
                     self.playerx.bonus_ammo(last_bonus)
             # Mengambil bonus ammo
             self.playerx.grab_bonus()
+
+            # End game ketika berhasil mencapai batas waktu atau player mati
+            end_game = 0
+            if self.playerx.hp==0 or (seconds==self.map.kemunculan[-1] and seconds!=end_game):
+                with open("./assets/score_ranking", "w+") as save_record:
+                    save_record.write(f"[{self.map.level, self.map.score}]\n")
+                running = False
 
             # Update frame
             pygame.display.update()
@@ -147,4 +155,3 @@ class Deadshooter:
         pygame.mixer.init()
         self.guns = pygame.mixer.Sound("./assets/audio/shot_effect.ogg")
         self.zombie_spawn = pygame.mixer.Sound("./assets/audio/zombie_effect.ogg")
-        self.bg_music =  pygame.mixer.music.load("./assets/audio/bg_music.mp3")

@@ -6,14 +6,16 @@ from setting import Settings
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
         pygame.display.set_caption("Deadshooter")
         self.screen = pygame.display.set_mode((850, 500))
         self.mainClock = pygame.time.Clock()
         self.font = pygame.font.SysFont(None, 20)
         self.click = False
-
+        # Memulai background sound (Music)
+        self.bg_music =  pygame.mixer.music.load("./assets/audio/bg_music.mp3")
+        
         self.main_menu_bg = pygame.image.load("./assets/menu.png").convert()
-       # self.start_bg = pygame.image.load("./assets/BG.png").convert()
 
         self.start_button_img = pygame.image.load(
             "./assets/start_button1.png"
@@ -41,7 +43,7 @@ class Game:
     def main_menu(self):
         while True:
             self.screen.blit(self.main_menu_bg, (0, 0))
-
+            pygame.mixer.music.play(-1)
             mx, my = pygame.mouse.get_pos()
 
             start_button_rect = pygame.Rect(139, 157, 225, 61)

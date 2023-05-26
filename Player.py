@@ -12,8 +12,8 @@ class Player:
         self.proyektil_peluru = []
         self.bonus_ammo_list = []
         self.isjump = False
-        self.hp = 100
-        self.jumlah_peluru = 100
+        self.hp = 10
+        self.jumlah_peluru = 30
         self.coor = [100, 350]
     def dead(self):
         pass
@@ -45,7 +45,7 @@ class Player:
             # print("Peluru habis")
             pass
     
-    def pergerakan_peluru(self, zombie):
+    def pergerakan_peluru(self, zombie, map):
         # menggerakkan proyektil ke atas
         for bullet in self.proyektil_peluru:
             bullet[0] += self.peluru_velo
@@ -54,9 +54,11 @@ class Player:
                 self.proyektil_peluru.remove(bullet)
             for coor in zombie.data_zombie:
                 if bullet[0]==coor[0]+20 and not (bullet[1]<coor[1]):
-                    # print("terkena damage")
                     self.proyektil_peluru.remove(bullet)
-                    zombie.data_zombie.remove(coor)
+                    coor[3] -=1
+                    if coor[3]==0:
+                        zombie.data_zombie.remove(coor)
+                        map.score += 1
                     break
         # print(f"Jumlah Zombie: {zombie.data_zombie}")
     def bonus_ammo(self, id):
@@ -86,5 +88,5 @@ class Player:
     def grab_bonus(self):
         for data in self.bonus_ammo_list:
             if data[0]==self.coor[0]:
-                self.jumlah_peluru += 50
+                self.jumlah_peluru += 30
                 self.bonus_ammo_list.remove(data)

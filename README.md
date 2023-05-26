@@ -1,5 +1,6 @@
 # Judul Proyek Game
 Dead Shooter
+![main](https://github.com/erichutabarat/Tubes-PBO/blob/main/Presentasi/Sampel/Main.jpg?raw=true)
 
 # Deskripsi Game
 Dead Shooter adalah game petualangan tembak menembak zombie dengan tujuan sampai ke titik akhir. Pada game terdapat player dan zombie, player harus menyelesaikan 3 level yang ada pada game.
