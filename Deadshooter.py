@@ -11,8 +11,7 @@ class Deadshooter:
         self.screen = map.screen
         self.font = pygame.font.SysFont(None, 20)
         pygame.display.set_caption(" Dead Shooter ")
-        self.bg = pygame.image.load("./assets/BG.png").convert()
-        self.bg = pygame.transform.scale(self.bg, (map.width, map.height))
+        self.bg = map.bg
         self.playerx = playerx
         self.zombiex = zombiex
         self.can_jump = True

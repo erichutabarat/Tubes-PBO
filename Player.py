@@ -57,4 +57,4 @@ class Player:
                     self.proyektil_peluru.remove(bullet)
                     zombie.data_zombie.remove(coor)
                     break
-        print(f"Jumlah Zombie: {zombie.data_zombie}")
+        # print(f"Jumlah Zombie: {zombie.data_zombie}")

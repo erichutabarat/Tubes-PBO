@@ -15,6 +15,8 @@ class level2(pygame.sprite.Sprite):
         pygame.init()
         self.mainClock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((self.width, self.height))
+        self.bg = pygame.image.load("./assets/BG2.png").convert()
+        self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
 
 map_level2 = level2()
 player_level2 = Player()
