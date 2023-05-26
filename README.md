@@ -1,5 +1,6 @@
 # Judul Proyek Game
 Dead Shooter
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://github.com/erichutabarat/Tubes-PBO/Presentasi/Sampel/Main.jpg)
 
 # Deskripsi Game
 Dead Shooter adalah game petualangan tembak menembak zombie dengan tujuan sampai ke titik akhir. Pada game terdapat player dan zombie, player harus menyelesaikan 3 level yang ada pada game.
