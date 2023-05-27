@@ -20,7 +20,7 @@ python main.py
 * pygame
 
 # UML Class Diagram
-
+![Uml Diagram](https://github.com/erichutabarat/Tubes-PBO/blob/main/assets/UML%20Diagram.jpg?raw=true)
 # Kontributor
 NIM | Nama
 ------ | ------
