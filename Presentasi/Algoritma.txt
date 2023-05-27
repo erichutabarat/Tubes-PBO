@@ -1,0 +1,30 @@
+Beberapa algoritma atau logika yang digunakan pada game adalah sebagai berikut:
+
+1. Pemilihan level
+Ketika user berada di menu pemilihan level, user akan memilih level 1 sampai 3.
+Setiap pilihan akan mengarah ke object class yang ada pada level_1.py, level_2.py, dan level_3.py.
+Ketika game berakhir atau game over user akan kembali ke tampilan ini.
+
+2. Pembuatan object Map, Player, dan Zombie
+Pada masing-masing level terdapat class yang akan menginisialisasi object Map, Player, dan Zombie. Kemudian ketiga object class tersebut akan dijalankan oleh Deadshooter.py sehingga permainan dimulai.
+
+3. Algoritma pergerakan dan gravitasi
+Pada object Deadshooter terdapat algoritma pergerakan yang menyesuaikan dengan keyboard. Key up akan menggerakan player melompat, key left akan menggerakan player ke kiri, dan key right akan menggerakan player ke kanan. Selain itu, terdapat algoritma gravitasi yang bertujuan membuat player kembali ke ground (tanah).
+
+4. Algoritma Menembak dan pergerakan peluru
+Ketika object class Player diinisialisasi terdapat batasan peluru yang akan digunakan player untuk menembak zombie. Saat ditembakan akan keluar peluru yang akan terus bergerak ke kanan, hingga mengenai zombie atau keluar dari layar.
+
+5. Bonus ammo dan grab bonus
+Algoritma ini mirip dengan pergerakan peluru. Tujuan dari bonus adalah ketika player mengambil bonus, jumlah peluru player akan bertambah.
+
+6. Pergerakan zombie dan damage zombie
+Zombie akan terus bergerak ke kiri hingga mengenai player atau keluar layar. Bila koordinta zombie dan player sama maka akan mengurangi hp player.
+
+7. Timer
+Pada game terdapat timer yang bertujuan sebagai dasar kemunculan zombie, bonus, dan kapan game berakhir.
+
+8. Score
+Ketika player mati atau game barhasil dimenangkan maka akan menyimpan data score pemain ke sebuah file di assets score_ranking.
+
+9. Algoritma Pause dan continue
+Ketika user sedang bermain, user dapat memberhentikan game sementara (Pause) dan memilih melanjutkan game atau keluar dari game.
